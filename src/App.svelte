@@ -1,100 +1,111 @@
 <script>
   import { onMount } from 'svelte';
 
-  const numberOfIssues = 7;
+  const numberOfitems = 8;
   let content;
   let lastScrollTop;
   let offsetY;
+  let offset = 0;
 
+  $: {
+    console.log(`lastScrollTop: ${lastScrollTop}`)
+    console.log(`${offset}    ${Math.floor(offset)}    ${Math.ceil(offset)}`);
+  }
   onMount(() => {
     offsetY = document.body.offsetHeight;
   })
 
-  const issues = [
+  const items = [
     {
-      id: 7,
-      title: 'Issue #7',
-      img: '/src/assets/issue7.png'
+      title: 'Azio Cascade Slim',
+      img: '/src/assets/azio-cascade-slim.png'
     },
     {
-      id: 6,
-      title: 'Issue #6',
-      img: '/src/assets/issue6.png'
+      title: 'Keychron Q8',
+      img: '/src/assets/keychron-q8.png'
     },
     {
-      id: 5,
-      title: 'Issue #5',
-      img: '/src/assets/issue5.png'
+      title: 'Kinesis Advantage 2',
+      img: '/src/assets/kinesis-advantage-2.png'
     },
     {
-      id: 4,
-      title: 'Issue #4',
-      img: '/src/assets/issue4.png'
+      title: 'Ergodox EZ',
+      img: '/src/assets/ergodox-ez.png'
     },
     {
-      id: 3,
-      title: 'Issue #3',
-      img: '/src/assets/issue3.png'
+      title: 'Nagado Daiko',
+      img: '/src/assets/nagado-daiko.png'
     },
     {
-      id: 2,
-      title: 'Issue #2',
-      img: '/src/assets/issue2.png'
+      title: 'ROLAND (Taiko-1)',
+      img: '/src/assets/roland-taiko-1.png'
     },
     {
-      id: 1,
-      title: 'Issue #1',
-      img: '/src/assets/issue1.png'
-    }
+      title: 'Rayneo XR Glasses',
+      img: '/src/assets/rayneo-xr-glasses.png'
+    },
+    {
+      title: 'Apple Pro Display XDR',
+      img: '/src/assets/apple-pro-display-xdr.png'
+
+    },
+    {
+      title: 'Atmoph Window 2',
+      img: '/src/assets/atmoph-window-2.png'
+    },
   ];
 
   const handleScroll = () => {
-    const offset = numberOfIssues - (lastScrollTop / offsetY);
+    offset = numberOfitems - (lastScrollTop / offsetY);
     const main = document.querySelector('.main');
 
-    if(offset > 6.5) {
-      main.style.backgroundColor = '#ff608c';
+    if(offset > 7.5) {
+      main.style.backgroundColor = '#5ca288';
+    } else if (offset > 6.5) {
+      main.style.backgroundColor = '#819cb5';
     } else if (offset > 5.5) {
+      main.style.backgroundColor = '#75bdeb';
+   } else if (offset > 4.5) {
       main.style.backgroundColor = '#fff';
-    } else if (offset > 4.5) {
-      main.style.backgroundColor = '#00c1b5';
-   } else if (offset > 3.5) {
-      main.style.backgroundColor = '#ff6519';
+    } else if (offset > 3.5) {
+      main.style.backgroundColor = '#b64b319e';
     } else if (offset > 2.5) {
-      main.style.backgroundColor = '#ffbe00';
+      main.style.backgroundColor = '#b865ff9e';
     } else if (offset > 1.5) {
-      main.style.backgroundColor = '#1d3fbb';
+      main.style.backgroundColor = '#fff';
     } else {
-      main.style.backgroundColor = '#E30512';
+      main.style.backgroundColor = '#fff';
     }
 
     lastScrollTop = content.scrollTop;
   }
+
 </script>
 
 <main>
   <header>
-    <img src="/src/assets/logo.png" class='logo'/>
-    <div class='contact'>info@backstagetalks.com</div>
+    <div class='logo'>Things I Want</div>
   </header>
   <div class='main' bind:this={content} on:scroll={handleScroll}>
-    {#each issues as issue}
-      <div class='fullscreen issue' id="issue{issue.id}" data-issue="{issue.id}">
-        <img src="{issue.img}"/>
+    {#each items as item, i}
+      <div class='fullscreen item' id={i+1}>
+        <img src="{item.img}"/>
       </div>
     {/each}
   </div>
   <footer>
-      <div class='description'>Backstage Talks is a magazine of casual, but in depth dialogues on design and business. Our decisions shape and influence this complex world—to have a chance to make the right ones, we need to talk.</div>
-      <div class="copyright">@ 2023 <a href='#'>Published by Büro Milk</a></div>
-      <div class='privacy-policy'>
-        <a href="#">Privacy Policy</a>
-      </div>
+      <div class='description'>
+      Welcome to my curated collection of Things I Want. 
+      Whether it's an item that satisfies my intellectual curiosity or a cherished dream 
+      I've nurtured for years, each selection holds a special place in this collection.
+    </div>
+      <div class="contact"><a href='mailto:hello@jiieu.com'>hello@jiieu.com</a></div>
+      <div class="copyright">@ 2023 Jii Eu</div>
   </footer>
   <nav>
     <ul>
-      {#each issues as issue}
-        <a href="#issue{issue.id}"><li>{issue.title}</li></a>
+      {#each items as item, i}
+        <a data-id={i+1} href="#{i+1}"><li>{item.title}</li></a>
       {/each}
     </ul>
   </nav>
@@ -102,36 +113,31 @@
 
 <style>
   .main {
-    background-color: #ff608c;
+    background-color: #5ca288;
     z-index: -1;
     height: 100vh;
     overflow: auto;
+    scroll-behavior: smooth;
     scroll-snap-type: y mandatory;
     transition: background-color 0.3s ease-in-out;
   }
 
-  .issue {
+  .item {
     scroll-snap-align: start;
+    position: relative;
   }
 
   header {
     position: fixed;
     top: 20px;
     width: 100%;
-    display: flex;
-    justify-content: space-between;
+    font-size: 2rem;
   }
 
   .logo {
-    width: 260px;
-    height: auto;
     margin-left: 15px;
-  }
-
-  .contact {
+    text-transform: uppercase;
     font-weight: 600;
-    font-size: 1.1rem;
-    margin-right: 15px;
   }
 
   footer {
@@ -145,13 +151,15 @@
 
   .description {
     font-size: 1.1rem;
-    font-weight: 600;
+    font-weight: 500;
     margin-bottom: 0.5rem;
   }
 
+  .contact,
   .copyright {
-    font-size: 0.7rem;
+    font-size: 0.8rem;
     font-weight: light;
+    margin: 0.25rem auto;
   }
 
   .privacy-policy {
@@ -165,6 +173,7 @@
     right: 0;
     bottom: 20px;
     font-size: 1.1rem;
+    font-weight: 500;
     margin-right: 15px;
   }
 
@@ -177,7 +186,8 @@
   }
 
   img {
-    width: 420px;
+    width: 50%;
+    min-width: 400px;
   }
 
   .fullscreen {
@@ -198,6 +208,10 @@
 
   li {
     list-style: none;
+  }
+
+  .active {
+    font-weight: bold;
   }
 
 </style>
