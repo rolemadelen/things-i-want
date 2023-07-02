@@ -3,9 +3,12 @@
   import { onMount } from 'svelte';
 
   let itemList = [];
+  let content;
+  let clientHeight = 1;
 
   onMount(() => {
     fetchItems().then(res => itemList = Array.from(res));
+    clientHeight = document.body.clientHeight;
   })
 
   async function fetchItems() {
@@ -21,15 +24,30 @@
     }
   }
 
+  const handleScroll = (e) => {
+    let itemPosition = Math.round(content.scrollTop / clientHeight) + 1;
+
+    if(itemPosition == 1) {
+      document.querySelector(`[data-id="${itemPosition}"]`).classList.add('active');
+      document.querySelector(`[data-id="${itemPosition + 1}"]`).classList.remove('active');
+    } else if(itemPosition > 1 && itemPosition < itemList.length) {
+      document.querySelector(`[data-id="${itemPosition - 1}"]`).classList.remove('active');
+      document.querySelector(`[data-id="${itemPosition}"]`).classList.add('active');
+      document.querySelector(`[data-id="${itemPosition + 1}"]`).classList.remove('active');
+    } else if(itemPosition === itemList.length){
+      document.querySelector(`[data-id="${itemPosition - 1}"]`).classList.remove('active');
+      document.querySelector(`[data-id="${itemPosition}"`).classList.add('active');
+    }
+  }
 </script>
 
 <main>
   <header>
     <div class='logo'>Things I Want</div>
   </header>
-  <div class='main'>
-    {#each itemList as item}
-      <div class='fullscreen item' id={item.id}>
+  <div class='main' bind:this={content} on:scroll={handleScroll}>
+    {#each itemList as item, i}
+      <div class='fullscreen item' id={i+1}>
         <img src="{item.img_src}"/>
         <div class='cost'>${item.cost}</div>
       </div>
@@ -46,8 +64,8 @@
   </footer>
   <nav>
     <ul>
-      {#each itemList as item}
-        <a data-id={item.id} href="#{item.id}"><li>{item.title}</li></a>
+      {#each itemList as item, i}
+        <a data-id={i+1} href="#{i+1}"><li>{item.title}</li></a>
       {/each}
     </ul>
   </nav>
@@ -70,6 +88,7 @@
 
   header {
     position: fixed;
+    left: 10px;
     top: 20px;
     width: 100%;
     font-size: 2rem;
@@ -84,7 +103,7 @@
   footer {
     position: fixed;
     bottom: 20px;
-    left: 0;
+    left: 10px;
     width: clamp(200px, 40vw, 320px);
     margin-left: 15px;
     line-height: 1.35;
@@ -111,7 +130,7 @@
 
   nav {
     position: fixed;
-    right: 0;
+    right: 15px;
     bottom: 20px;
     font-size: 1.1rem;
     font-weight: 500;
@@ -157,8 +176,17 @@
     list-style: none;
   }
 
-  .active {
+  :global(.active) {
+    color: #4949CF !important;
     font-weight: bold;
+    transition: all 0.1s ease-in-out;
   }
+
+  :global(.active::before) {
+    content: "⇢";
+    position: absolute;
+    left: -1.5rem;
+  }
+
 
 </style>
