@@ -26,18 +26,27 @@
 
   const handleScroll = (e) => {
     let itemPosition = Math.round(content.scrollTop / clientHeight) + 1;
+    const prev = document.querySelector(`[data-id="${itemPosition - 1}"]`);
+    const curr = document.querySelector(`[data-id="${itemPosition}"]`);
+    const next = document.querySelector(`[data-id="${itemPosition + 1}"]`);
+
+    document.querySelector('.main').style.backgroundColor = `${itemList[itemPosition-1].bg_color}`;
 
     if(itemPosition == 1) {
-      document.querySelector(`[data-id="${itemPosition}"]`).classList.add('active');
-      document.querySelector(`[data-id="${itemPosition + 1}"]`).classList.remove('active');
+      curr.classList.add('active');
+      next.classList.remove('active');
     } else if(itemPosition > 1 && itemPosition < itemList.length) {
-      document.querySelector(`[data-id="${itemPosition - 1}"]`).classList.remove('active');
-      document.querySelector(`[data-id="${itemPosition}"]`).classList.add('active');
-      document.querySelector(`[data-id="${itemPosition + 1}"]`).classList.remove('active');
+      prev.classList.remove('active');
+      curr.classList.add('active');
+      next.classList.remove('active');
     } else if(itemPosition === itemList.length){
-      document.querySelector(`[data-id="${itemPosition - 1}"]`).classList.remove('active');
-      document.querySelector(`[data-id="${itemPosition}"`).classList.add('active');
+      prev.classList.remove('active');
+      curr.classList.add('active');
     }
+  }
+
+  const displayCost = (cost) => {
+    return cost.toLocaleString('en-us');
   }
 </script>
 
@@ -49,15 +58,15 @@
     {#each itemList as item, i}
       <div class='fullscreen item' id={i+1}>
         <img src="{item.img_src}"/>
-        <div class='cost'>${item.cost}</div>
+        <div class='cost'>${displayCost(item.cost)}</div>
       </div>
     {/each}
   </div>
   <footer>
       <div class='description'>
-      Welcome to my curated collection of Things I Want. 
-      Whether it's an item that satisfies my intellectual curiosity or a cherished dream 
-      I've nurtured for years, each selection holds a special place in this collection.
+      Hey, welcome to my awesome collection of Things I Want! 
+      This is basically my wishlist as a developer, taiko player, and curious being. 
+      It includes items that fulfill my tech cravings, drumming desires, and intellectual pursuits.
     </div>
       <div class="contact"><a href='mailto:hello@jiieu.com'>hello@jiieu.com</a></div>
       <div class="copyright">@ 2023 Jii Eu</div>
@@ -110,7 +119,7 @@
   }
 
   .description {
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: 500;
     margin-bottom: 0.5rem;
   }
@@ -132,7 +141,7 @@
     position: fixed;
     right: 15px;
     bottom: 20px;
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: 500;
     margin-right: 15px;
   }
