@@ -8,4 +8,5 @@
   -webkit-font-smoothing: antialiased;
   scroll-behavior: smooth;
   font-family: "Quicksand", sans-serif;
+  min-width: 480px;
 }
