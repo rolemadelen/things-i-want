@@ -1,5 +1,5 @@
 <script>
-  import { supabase } from '/src/supabaseClient';
+  import { supabase } from './supabaseClient';
   import { onMount } from 'svelte';
 
   let itemList = [];
