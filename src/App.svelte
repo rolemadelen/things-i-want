@@ -63,11 +63,6 @@
     {/each}
   </div>
   <footer>
-      <div class='description'>
-      Hey, welcome to my awesome collection of Things I Want! 
-      This is basically my wishlist as a developer, taiko player, and curious being. 
-      It includes items that fulfill my tech cravings, drumming desires, and intellectual pursuits.
-    </div>
       <div class="contact"><a href='mailto:hello@jiieu.com'>hello@jiieu.com</a></div>
       <div class="copyright">@ 2023 Jii Eu</div>
   </footer>
@@ -82,7 +77,7 @@
 
 <style>
   .main {
-    z-index: -1;
+    z-index: -100;
     height: 100vh;
     overflow: auto;
     scroll-behavior: smooth;
@@ -156,6 +151,11 @@
 
   img {
     width: 100%;
+    transition: all 0.2s ease-in-out;
+  }
+
+  img:hover {
+    transform: scale(1.1);
   }
 
   .fullscreen {
@@ -170,6 +170,11 @@
   }
 
   .cost {
+    position: absolute;
+    left: -70%;
+    font-size: 5rem;
+    font-weight: bold;
+    opacity: 0.25;
   }
 
   a {
