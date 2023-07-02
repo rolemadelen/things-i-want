@@ -57,7 +57,7 @@
   <div class='main' bind:this={content} on:scroll={handleScroll}>
     {#each itemList as item, i}
       <div class='fullscreen item' id={i+1}>
-        <img src="{item.img_src}"/>
+        <img src="{item.img_src}" alt={item.title}/>
         <div class='cost'>${displayCost(item.cost)}</div>
       </div>
     {/each}
@@ -113,23 +113,11 @@
     line-height: 1.35;
   }
 
-  .description {
-    font-size: 1rem;
-    font-weight: 500;
-    margin-bottom: 0.5rem;
-  }
-
   .contact,
   .copyright {
     font-size: 0.8rem;
     font-weight: light;
     margin: 0.25rem auto;
-  }
-
-  .privacy-policy {
-    font-size: 1.1rem;
-    font-weight: 600;
-    margin-top: 2rem;
   }
 
   nav {
