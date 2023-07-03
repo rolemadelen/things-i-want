@@ -7,8 +7,6 @@
   let clientHeight = 1;
   let imageInfo = new WeakMap();
 
-  $: console.log(imgUrl);
-
   onMount(() => {
     fetchItems() 
     .then(fetchImages)
