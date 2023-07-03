@@ -36,7 +36,7 @@
   async function fetchItems() {
     const { data, error } = await supabase
       .from('Item')
-      .select('id, title, filename, img_src, bg_color, cost')
+      .select('id, title, filename, bg_color, cost')
       .order('title');
 
     if(error) {
