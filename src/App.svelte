@@ -1,25 +1,50 @@
 <script>
   import { supabase } from './supabaseClient';
-  import { onMount } from 'svelte';
+  import { onMount, tick, afterUpdate } from 'svelte';
 
   let itemList = [];
   let content;
   let clientHeight = 1;
+  let imageInfo = new WeakMap();
+
+  $: console.log(imgUrl);
 
   onMount(() => {
-    fetchItems().then(res => itemList = Array.from(res));
+    fetchItems() 
+    .then(fetchImages)
+    .then(imgData => {
+        const imageContainer = document.querySelectorAll('.fullscreen');
+
+        imageContainer.forEach((image, i) => {
+          image.children[0].src = imgData[image.children[0].alt];
+        })
+      })
     clientHeight = document.body.clientHeight;
   })
+
+  async function fetchImages(items) {
+    await Promise.all(items.map(async function(item) {
+      const {data, error} = await supabase 
+      .storage 
+      .from('images')
+      .createSignedUrl(item.filename, 60);
+
+      imageInfo[item.title] = data.signedUrl
+    }))
+
+    return imageInfo
+  }
 
   async function fetchItems() {
     const { data, error } = await supabase
       .from('Item')
-      .select('id, title, img_src, bg_color, cost')
+      .select('id, title, filename, img_src, bg_color, cost')
       .order('title');
 
     if(error) {
       console.error('error')
     } else {
+      itemList = data;
       return data;
     }
   }
@@ -57,7 +82,7 @@
   <div class='main' bind:this={content} on:scroll={handleScroll}>
     {#each itemList as item, i}
       <div class='fullscreen item' id={i+1}>
-        <img src="{item.img_src}" alt={item.title}/>
+        <img src="#" alt={item.title}/>
         <div class='cost'>${displayCost(item.cost)}</div>
       </div>
     {/each}
