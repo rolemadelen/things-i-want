@@ -11,78 +11,91 @@
       title: 'Apple Pro Display XDR | Nano-texture glass',
       cost: '5,999.00',
       src: '/assets/apple-pro-display-xdr.png',
+      link: 'https://www.apple.com/shop/buy-mac/pro-display-xdr',
       tags: ['monitor', 'electronic']
     },
     {
       title: '14-inch MacBook Pro | M2 Max, 64GB, 1TB SSD',
       cost: '3,099.00',
       src: '/assets/macbook-pro-14inch.png',
+      link: 'https://www.apple.com/shop/buy-mac/macbook-pro/14-inch-space-gray-apple-m2-max-with-12-core-cpu-and-30-core-gpu-1tb',
       tags: ['electronic', 'laptop']
     },
     {
       title: '12.9-inch iPad Pro Wi-Fi 512GB + Apple Pencil',
       cost: '1,528.00',
       src: '/assets/ipad-pro-12-9-inch.png',
+      link: 'https://www.apple.com/shop/buy-ipad/ipad-pro/12.9-inch-display-512gb-space-gray-wifi',
       tags: ['electronic', 'tablet']
     },
     {
       title: 'Nagado Daiko',
-      cost: '926.75',
+      cost: '894.01',
       src: '/assets/nagado-daiko.png',
+      link: "https://taiko-shop.com/products/nagado-daiko-smile-brown?variant=32251795046471",
       tags: ['taiko']
     },
     {
       title: 'Azio Cascade Slim',
       cost: '99.99',
       src: '/assets/azio-cascade-slim.png',
+      link: 'https://www.aziocorp.com/collections/keyboard/products/cascade-slim-75-wireless-hot-swappable-keyboard',
       tags: ['keyboard']
     },
     {
       title: 'Atomph Window 2',
       cost: '499.00',
       src: '/assets/atmoph-window-2.png',
+      link: 'https://store.atmoph.com/en/collections/atmoph-window-2/products/atmoph-window-2-basic-1?variant=21032164491318',
       tags: ['electronic']
     }, 
     {
       title: 'Bolt Jime Shime Daiko',
       cost: '1,081.21',
       src: '/assets/bolt-jime-shime-daiko.png',
+      link: "https://taiko-shop.com/collections/shime-daiko-taiko-drum/products/bamboo-bolt-jime-shime-daiko-namitsuke",
       tags: ['taiko']
     },
     {
       title: 'Ergodox EZ',
-      cost: '295.00',
+      cost: '354.00',
       src: '/assets/ergodox-ez.png',
+      link: 'https://ergodox-ez.com/buy',
       tags: ['keyboard']
     },
     {
       title: 'Flexispot EC1 Standing Desk',
       cost: '239.00',
       src: '/assets/flexispot-ec1.png',
+      link: 'https://www.amazon.com/Flexispot-Electric-Workstation-Whole-Piece-Adjustable/dp/B0851BF95W/ref=sr_1_1_sspa?keywords=flexispot+standing+desk&qid=1688845372&sprefix=flexispot+stand%2Caps%2C126&sr=8-1-spons&ufe=app_do%3Aamzn1.fos.f5122f16-c3e8-4386-bf32-63e904010ad0&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&psc=1',
       tags: ['electronic', 'desk']
     },
     {
       title: 'Kensington iPad Docking',
       cost: '199.99',
       src: '/assets/kensington-ipad-docking.png',
+      link: 'https://store.kensington.com/collections/studiodock/products/studiodock%E2%84%A2-ipad-docking-station-ipad-pro-12-9-2021',
       tags: ['electronic']
     },
     {
       title: 'Keychron Q8',
       cost: '195.00',
       src: '/assets/keychron-q8.png',
+      link: 'https://www.keychron.com/products/keychron-q8-alice-layout-qmk-custom-mechanical-keyboard',
       tags: ['keyboard']
     }, 
     {
       title: 'Kinesis Advantage 2',
-      cost: '1,484.99',
+      cost: '369.99',
       src: '/assets/kinesis-advantage-2.png',
+      link: 'https://kinesis-ergo.com/shop/advantage2/',
       tags: ['keyboard']
     },
     {
       title: 'Lukcy Cat Artisan Keycap',
       cost: '59.00',
       src: '/assets/lucky-cat-artisan-keycap.png',
+      link: 'https://www.etsy.com/listing/1217142330/lucky-cat-artisan-keycap-for-cherry-mx?ref=listing_page_ad_row-5&plkey=bdf26c910c03b84270405cbd29546e72b94b0641%3A1217142330&listing_id=1217142330&listing_slug=lucky-cat-artisan-keycap-for-cherry-mx',
       tags: ['keycap']
     },
     {
@@ -117,18 +130,21 @@
       title: 'Rayneo XR Glasses',
       cost: '399.00',
       src: '/assets/rayneo-xr-glasses.png',
+      link: 'https://www.rayneo.com/',
       tags: ['electronic']
     },
     {
       title: 'ROLAND Taiko-1',
-      cost: '1,499.00',
+      cost: '1,499.99',
       src: '/assets/roland-taiko-1.png',
+      link: "https://asano.us/products/taiko-1-roland",
       tags: ['electronic', 'taiko']
     },
     {
       title: 'Ultimate Hacking Keyboard',
       cost: '320.00',
       src: '/assets/ultimate-hacking-keyboard.png',
+      link: "https://ultimatehackingkeyboard.com/",
       tags: ['keyboard']
     }
   ]
@@ -161,6 +177,9 @@
           <div class='item-name'>{item.title}</div>
           <div class='item-cost'>${item.cost}</div>
         </div>
+          <a href={item.link} target="_blank" rel="noopener noreferrer">
+            <img class="link-arrow" src="/arrow.svg" width="25" height="25" alt="arrow" />
+          </a>
       </div>
     {/each}
   </div>
@@ -170,6 +189,7 @@
   main {
     width: fit-content;
   }
+
   .grid {
     display: grid;
     grid-template-columns: repeat(1, 1fr);
@@ -203,6 +223,20 @@
 
   .item-cost {
     font-weight: bold;
+  }
+
+  img.link-arrow {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 15px;
+    padding: 1rem;
+    transition: all 0.2s ease-in-out;
+  }
+
+  img.link-arrow:hover {
+    top: 3px;
+    right: 3px;
   }
   
   @media(min-width: 500px) {
