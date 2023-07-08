@@ -4,8 +4,6 @@ Welcome to the "Things I Want" page!
 This is a carefully curated list of items that I aspire to have in my life.
 From monitors and AR glasses to keyboards and authentic taiko drums, this collection encompasses a wide range of coveted objects.
 
-![sample](./public/sample.gif)
-
 ## Purpose
 
 The purpose of this page is to showcase my personal wishlist,
@@ -13,7 +11,7 @@ featuring items that have captured my interest and resonate with my passions.
 
 ## Original Design
 
-![original design](./public/things-i-want.pdf)
+[original design.pdf](./public/things-i-want.pdf)
 
 ## What I learned
 
@@ -27,7 +25,7 @@ featuring items that have captured my interest and resonate with my passions.
   - Svelte Transition
   - Grid system
     - grid-auto-flow
-- **version 1** (branch [https://github.com/rolemadelen/things-i-want/tree/v1])
+- **version 1** (branch [v1](https://github.com/rolemadelen/things-i-want/tree/v1))
   - Svelte (first time using it)
   - scroll transitions
     - scroll-snap
