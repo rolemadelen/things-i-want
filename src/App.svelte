@@ -2,9 +2,26 @@
   import Navigation from './Navigation.svelte'
   import Header from './Header.svelte'
   import Image from './Image.svelte'
-  import { category } from './store.js'
+  import HoverMode from './HoverMode.svelte'
+  import { category, hoverMode } from './store.js'
   import { onDestroy } from 'svelte'
   import { fly } from 'svelte/transition'
+
+  let hoverModeToggle = true;
+
+  $: {
+    if(hoverModeToggle) {
+      const elems = document.querySelectorAll('.grid-item')
+      elems.forEach(elem => {
+        elem.classList.add('hover-mode')
+      })
+    } else {
+      const elems = document.querySelectorAll('.grid-item')
+      elems.forEach(elem => {
+        elem.classList.remove('hover-mode')
+      })
+    }
+  }
 
   const items = [
     {
@@ -149,21 +166,26 @@
     }
   ]
 
-  let categoryItems = [];
+  let categoryItems = []
 
   const unsubscribe = category.subscribe(text => {
-    if(text === 'all') categoryItems = items;
+    if(text === 'all') categoryItems = items
     else {
-      categoryItems = [];
+      categoryItems = []
       items.map(item => {
         if(item.tags.includes(text)) {
-          categoryItems = [...categoryItems, item];
+          categoryItems = [...categoryItems, item]
         }
       })
     }
   })
 
-  onDestroy(unsubscribe);
+  const unsubscribe2 = hoverMode.subscribe(mode => {
+    hoverModeToggle = mode
+  })
+
+  onDestroy(unsubscribe)
+  onDestroy(unsubscribe2)
 </script>
 
 <main>
@@ -171,18 +193,19 @@
   <Navigation items={items} />
   <div class='grid'>
     {#each categoryItems as item}
-      <div transition:fly={{y: 200, duration: 250}} class='grid-item'>
+      <div transition:fly={{y: 200, duration: 250}} class='grid-item' class:hover-mode={hoverModeToggle}>
         <Image src={item.src} alt={item.title} />
-        <div class="item-info">
-          <div class='item-name'>{item.title}</div>
-          <div class='item-cost'>${item.cost}</div>
-        </div>
+          <div class="item-info">
+            <div class='item-name'>{item.title}</div>
+            <div class='item-cost'>${item.cost}</div>
+          </div>
           <a href={item.link} target="_blank" rel="noopener noreferrer">
-            <img class="link-arrow" src="/arrow.svg" width="25" height="25" alt="arrow" />
+            <div class="link-arrow" />
           </a>
       </div>
     {/each}
   </div>
+  <HoverMode />
 </main>
 
 <style>
@@ -225,45 +248,47 @@
     font-weight: bold;
   }
 
-  img.link-arrow {
+  .link-arrow {
+    background-image: url('/arrow-black.svg');
+    background-size: cover;
+    background-repeat: no-repeat;
     position: absolute;
     margin: 0.5rem 0.5rem 0 0;
     top: 3px;
     right: 3px;
-    width: 15px;
-    padding: 0.1rem;
+    width: 0.8rem;
+    height: 0.8rem;
     transition: all 0.2s ease-in-out;
-    border-top: 2px solid black;
-    border-right: 2px solid black;
   }
 
-  img.link-arrow:hover {
+  .link-arrow:hover {
     top: 0px;
     right: 0px;
   }
-  
+
   @media(min-width: 500px) {
     .grid-item {
       width: auto;
     }
   }
   @media(min-width: 900px) {
-    img.link-arrow {
-      margin: 0;
-      padding: 1rem;
-      border: none;
-    }
     .grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       grid-auto-rows: 500px;
     }
 
-    .item-info {
+    .hover-mode .link-arrow {
+      background-image: url('/arrow.svg');
+      width: 1rem;
+      height: 1rem;
+    }
+
+    .hover-mode .item-info {
       color: white;
     }
 
-    .grid-item:hover {
+    .hover-mode:hover {
       background-color: #111;
       transition: all 0.2s ease-in-out;
     }
