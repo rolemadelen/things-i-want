@@ -1,6 +1,7 @@
 <script>
   import Navigation from './Navigation.svelte'
   import Header from './Header.svelte'
+  import Image from './Image.svelte'
   import { category } from './store.js'
   import { onDestroy } from 'svelte'
   import { fly } from 'svelte/transition'
@@ -115,7 +116,7 @@
   <div class='grid'>
     {#each categoryItems as item}
       <div transition:fly={{y: 200, duration: 250}} class='grid-item'>
-        <img src={item.src} alt={item.title} />
+        <Image src={item.src} alt={item.title} />
         <div class="item-info">
           <div class='item-name'>{item.title}</div>
           <div class='item-cost'>${item.cost}</div>
