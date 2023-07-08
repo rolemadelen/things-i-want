@@ -11,7 +11,19 @@
       title: 'Apple Pro Display XDR | Nano-texture glass',
       cost: '5,999.00',
       src: '/assets/apple-pro-display-xdr.png',
-      tags: ['monitor', 'display']
+      tags: ['monitor', 'electronic']
+    },
+    {
+      title: '14-inch MacBook Pro | M2 Max, 64GB, 1TB SSD',
+      cost: '3,099.00',
+      src: '/assets/macbook-pro-14inch.png',
+      tags: ['electronic', 'laptop']
+    },
+    {
+      title: '12.9-inch iPad Pro Wi-Fi 512GB + Apple Pencil',
+      cost: '1,528.00',
+      src: '/assets/ipad-pro-12-9-inch.png',
+      tags: ['electronic', 'tablet']
     },
     {
       title: 'Nagado Daiko',
@@ -29,7 +41,7 @@
       title: 'Atomph Window 2',
       cost: '499.00',
       src: '/assets/atmoph-window-2.png',
-      tags: ['electronic', 'display']
+      tags: ['electronic']
     }, 
     {
       title: 'Bolt Jime Shime Daiko',
@@ -71,6 +83,34 @@
       title: 'Lukcy Cat Artisan Keycap',
       cost: '59.00',
       src: '/assets/lucky-cat-artisan-keycap.png',
+      tags: ['keycap']
+    },
+    {
+      title: 'Kaonashi Artisan Keycap',
+      cost: '39.00',
+      src: '/assets/kaonashi-artisan-keycap.webp',
+      link: 'https://www.etsy.com/listing/1440589845/spirited-away-no-face-artisan-keycap-for?ga_order=most_relevant&ga_search_type=all&ga_view_type=gallery&ga_search_query=artisan+keycaps&ref=sr_gallery-6-30&frs=1&organic_search_click=1',
+      tags: ['keycap']
+    },
+    {
+      title: 'Starbucks Coffee Artisan Keycap',
+      cost: '24.99',
+      src: '/assets/starbucks-coffee-artisan-keycap.jpg',
+      link: 'https://www.etsy.com/listing/1062092028/starbucks-coffee-keycaps-handmade-resin?ga_order=most_relevant&ga_search_type=all&ga_view_type=gallery&ga_search_query=artisan+keycaps&ref=sr_gallery-8-31&organic_search_click=1&variation0=2192027624',
+      tags: ['keycap']
+    },
+    {
+      title: 'Susuwatari Artisan Keycap',
+      cost: '39.00',
+      src: '/assets/susuwatari-artisan-keycap.webp',
+      link: 'https://www.etsy.com/listing/1414040794/spirited-away-soot-sprite-artisan-keycap?click_key=406ed5652e349b3d43b3ace60680de5657694608%3A1414040794&click_sum=0943f18f&ref=market_strv-2&frs=1',
+      tags: ['keycap']
+    },
+    {
+      title: 'Kaonashi Keycap Sculpture',
+      cost: '216.05',
+      src: '/assets/kaonashi-keycap-sculpture.png',
+      link: "https://www.etsy.com/listing/1374904925/no-face-keycap-sculpture-for-mechanical?ga_order=most_relevant&ga_search_type=all&ga_view_type=gallery&ga_search_query=artisan+keycaps&ref=sr_gallery-32-29&organic_search_click=1",
       tags: ['keycap']
     },
     {
