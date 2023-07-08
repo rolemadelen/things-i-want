@@ -11,11 +11,10 @@
     <a href="mailto:hello@jiieu.com">hello@jiieu.com</a>
   </div>
   <div class='header-desc grid-item'>
-    Welcome to my carefully curated list of things I want. 
-    This collection represents a compilation of items that hold a special place in my heart, 
-    both as a developer and as a passionate taiko player.
-    These coveted items embody the fusion of my professional 
-    aspirations and personal passions, encapsulating both the products of my pure curiosity and the tools that can bring my dreams to life.
+    Welcome to my carefully curated list of coveted items. 
+    As a developer, taiko player, and curious human being, I have compiled a collection of objects that I aspire to have in my life. 
+    From high-quality monitors and AR/VR gears to mechanical and ergonomic keyboards and authentic taiko drums. 
+   This collection embodies a diverse range of coveted objects that fuel my passions and aspirations.
   </div>
 </header>
 
@@ -78,6 +77,7 @@
       font-size: 1rem;
       grid-column: 1 / span 2;
       line-height: 1.25;
+      padding: 2rem;
     }
 
       .hello {
@@ -100,7 +100,7 @@
         font-size: 3rem;
       }
       .header-desc {
-        padding: 1rem 5rem;
+        padding: 2rem 5rem;
       }
     }
 
