@@ -55,6 +55,7 @@
     display: none;
   }
 
+  .hello,
   .email {
     color: #777;
     padding: 1rem 0;
