@@ -35,8 +35,8 @@ nav {
   width: 100vw;
   overflow-x: scroll;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  grid-auto-columns: minmax(200px, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(125px, 1fr));
+  grid-auto-columns: minmax(125px, 1fr);
   box-sizing: border-box;
 }
 

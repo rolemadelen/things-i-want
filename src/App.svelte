@@ -126,6 +126,9 @@
 </main>
 
 <style>
+  main {
+    width: fit-content;
+  }
   .grid {
     display: grid;
     grid-template-columns: repeat(1, 1fr);
@@ -136,6 +139,7 @@
   .grid-item {
     position: relative;
     border: 1px solid #eee;
+    width: 100vw;
 
     display: flex;
     justify-content: center;
@@ -160,6 +164,11 @@
     font-weight: bold;
   }
   
+  @media(min-width: 500px) {
+    .grid-item {
+      width: auto;
+    }
+  }
   @media(min-width: 900px) {
     .grid {
       display: grid;
