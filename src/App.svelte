@@ -1,217 +1,191 @@
 <script>
-  import { supabase } from './supabaseClient';
-  import { onMount, tick, afterUpdate } from 'svelte';
+  import Navigation from './Navigation.svelte'
+  import Header from './Header.svelte'
+  import { category } from './store.js'
+  import { onDestroy } from 'svelte'
+  import { fly } from 'svelte/transition'
 
-  let itemList = [];
-  let content;
-  let clientHeight = 1;
-  let imageInfo = new WeakMap();
+  const items = [
+    {
+      title: 'Apple Pro Display XDR | Nano-texture glass',
+      cost: '5,999.00',
+      src: '/assets/apple-pro-display-xdr.png',
+      tags: ['monitor', 'display']
+    },
+    {
+      title: 'Nagado Daiko',
+      cost: '926.75',
+      src: '/assets/nagado-daiko.png',
+      tags: ['taiko']
+    },
+    {
+      title: 'Azio Cascade Slim',
+      cost: '99.99',
+      src: '/assets/azio-cascade-slim.png',
+      tags: ['keyboard']
+    },
+    {
+      title: 'Atomph Window 2',
+      cost: '499.00',
+      src: '/assets/atmoph-window-2.png',
+      tags: ['electronic', 'display']
+    }, 
+    {
+      title: 'Bolt Jime Shime Daiko',
+      cost: '1,081.21',
+      src: '/assets/bolt-jime-shime-daiko.png',
+      tags: ['taiko']
+    },
+    {
+      title: 'Ergodox EZ',
+      cost: '295.00',
+      src: '/assets/ergodox-ez.png',
+      tags: ['keyboard']
+    },
+    {
+      title: 'Flexispot EC1 Standing Desk',
+      cost: '239.00',
+      src: '/assets/flexispot-ec1.png',
+      tags: ['electronic', 'desk']
+    },
+    {
+      title: 'Kensington iPad Docking',
+      cost: '199.99',
+      src: '/assets/kensington-ipad-docking.png',
+      tags: ['electronic']
+    },
+    {
+      title: 'Keychron Q8',
+      cost: '195.00',
+      src: '/assets/keychron-q8.png',
+      tags: ['keyboard']
+    }, 
+    {
+      title: 'Kinesis Advantage 2',
+      cost: '1,484.99',
+      src: '/assets/kinesis-advantage-2.png',
+      tags: ['keyboard']
+    },
+    {
+      title: 'Lukcy Cat Artisan Keycap',
+      cost: '59.00',
+      src: '/assets/lucky-cat-artisan-keycap.png',
+      tags: ['keycap']
+    },
+    {
+      title: 'Rayneo XR Glasses',
+      cost: '399.00',
+      src: '/assets/rayneo-xr-glasses.png',
+      tags: ['electronic']
+    },
+    {
+      title: 'ROLAND Taiko-1',
+      cost: '1,499.00',
+      src: '/assets/roland-taiko-1.png',
+      tags: ['electronic', 'taiko']
+    },
+    {
+      title: 'Ultimate Hacking Keyboard',
+      cost: '320.00',
+      src: '/assets/ultimate-hacking-keyboard.png',
+      tags: ['keyboard']
+    }
+  ]
 
-  onMount(() => {
-    fetchItems() 
-    .then(fetchImages)
-    .then(imgData => {
-        const imageContainer = document.querySelectorAll('.fullscreen');
+  let categoryItems = [];
 
-        imageContainer.forEach((image, i) => {
-          image.children[0].src = imgData[image.children[0].alt];
-        })
+  const unsubscribe = category.subscribe(text => {
+    if(text === 'all') categoryItems = items;
+    else {
+      categoryItems = [];
+      items.map(item => {
+        if(item.tags.includes(text)) {
+          categoryItems = [...categoryItems, item];
+        }
       })
-    clientHeight = document.body.clientHeight;
+    }
   })
 
-  async function fetchImages(items) {
-    await Promise.all(items.map(async function(item) {
-      const {data, error} = await supabase 
-      .storage 
-      .from('images')
-      .createSignedUrl(item.filename, 60);
-
-      imageInfo[item.title] = data.signedUrl
-    }))
-
-    return imageInfo
-  }
-
-  async function fetchItems() {
-    const { data, error } = await supabase
-      .from('Item')
-      .select('id, title, filename, bg_color, cost')
-      .order('title');
-
-    if(error) {
-      console.error('error')
-    } else {
-      itemList = data;
-      return data;
-    }
-  }
-
-  const handleScroll = (e) => {
-    let itemPosition = Math.round(content.scrollTop / clientHeight) + 1;
-    const prev = document.querySelector(`[data-id="${itemPosition - 1}"]`);
-    const curr = document.querySelector(`[data-id="${itemPosition}"]`);
-    const next = document.querySelector(`[data-id="${itemPosition + 1}"]`);
-
-    document.querySelector('.main').style.backgroundColor = `${itemList[itemPosition-1].bg_color}`;
-
-    if(itemPosition == 1) {
-      curr.classList.add('active');
-      next.classList.remove('active');
-    } else if(itemPosition > 1 && itemPosition < itemList.length) {
-      prev.classList.remove('active');
-      curr.classList.add('active');
-      next.classList.remove('active');
-    } else if(itemPosition === itemList.length){
-      prev.classList.remove('active');
-      curr.classList.add('active');
-    }
-  }
-
-  const displayCost = (cost) => {
-    return cost.toLocaleString('en-us');
-  }
+  onDestroy(unsubscribe);
 </script>
 
 <main>
-  <header>
-    <div class='logo'>Things I Want</div>
-  </header>
-  <div class='main' bind:this={content} on:scroll={handleScroll}>
-    {#each itemList as item, i}
-      <div class='fullscreen item' id={i+1}>
-        <img src="#" alt={item.title}/>
-        <div class='cost'>${displayCost(item.cost)}</div>
+  <Header />
+  <Navigation items={items} />
+  <div class='grid'>
+    {#each categoryItems as item}
+      <div transition:fly={{y: 200, duration: 250}} class='grid-item'>
+        <img src={item.src} alt={item.title} />
+        <div class="item-info">
+          <div class='item-name'>{item.title}</div>
+          <div class='item-cost'>${item.cost}</div>
+        </div>
       </div>
     {/each}
   </div>
-  <footer>
-      <div class="contact"><a href='mailto:hello@jiieu.com'>hello@jiieu.com</a></div>
-      <div class="copyright">@ 2023 Jii Eu</div>
-  </footer>
-  <nav>
-    <ul>
-      {#each itemList as item, i}
-        <a data-id={i+1} href="#{i+1}"><li>{item.title}</li></a>
-      {/each}
-    </ul>
-  </nav>
 </main>
 
 <style>
-  .main {
-    z-index: -100;
-    height: 100vh;
-    overflow: auto;
-    scroll-behavior: smooth;
-    scroll-snap-type: y mandatory;
-    transition: background-color 0.3s ease-in-out;
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-auto-rows: 500px;
+    box-sizing: border-box;
   }
-
-  .item {
-    scroll-snap-align: start;
+  
+  .grid-item {
     position: relative;
-  }
+    border: 1px solid #eee;
 
-  header {
-    position: fixed;
-    left: 10px;
-    top: 20px;
-    width: 100%;
-    font-size: 2rem;
-  }
-
-  .logo {
-    margin-left: 15px;
-    text-transform: uppercase;
-    font-weight: 600;
-  }
-
-  footer {
-    position: fixed;
-    bottom: 20px;
-    left: 10px;
-    width: clamp(200px, 40vw, 320px);
-    margin-left: 15px;
-    line-height: 1.35;
-  }
-
-  .contact,
-  .copyright {
-    font-size: 0.8rem;
-    font-weight: light;
-    margin: 0.25rem auto;
-  }
-
-  nav {
-    position: fixed;
-    right: 15px;
-    bottom: 20px;
-    font-size: 1rem;
-    font-weight: 500;
-    margin-right: 15px;
-  }
-
-  nav li {
-    margin-bottom: 0.5rem;
-  }
-
-  nav li:hover {
-    text-decoration: underline;
-  }
-
-  img {
-    width: 100%;
-    transition: all 0.2s ease-in-out;
-  }
-
-  img:hover {
-    transform: scale(1.1);
-  }
-
-  .fullscreen {
-    min-width: 400px;
-    max-width: 35vw;
-    margin: 0 auto;
-    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
+    transition: all 0.2s ease-in-out;
   }
 
-  .cost {
+  .grid-item img {
+    width: 300px;
+    height: auto;
+  }
+
+  .item-info {
     position: absolute;
-    left: -70%;
-    font-size: 5rem;
+    bottom: 16px;
+    left: 16px;
+    font-size: 14px;
+    color: #333;
+  }
+
+  .item-cost {
     font-weight: bold;
-    opacity: 0.25;
+  }
+  
+  @media(min-width: 900px) {
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-auto-rows: 500px;
+    }
+
+    .item-info {
+      color: white;
+    }
+
+    .grid-item:hover {
+      background-color: #111;
+      transition: all 0.2s ease-in-out;
+    }
   }
 
-  a {
-    color: inherit;
-    text-decoration: none;
+  @media(min-width: 1200px) {
+    .grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
   }
 
-  footer a {
-    text-decoration: underline;
+  @media(min-width: 1920px) {
+    .grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
   }
-
-  li {
-    list-style: none;
-  }
-
-  :global(.active) {
-    color: #4949CF !important;
-    font-weight: bold;
-    transition: all 0.1s ease-in-out;
-  }
-
-  :global(.active::before) {
-    content: "⇢";
-    position: absolute;
-    left: -1.5rem;
-  }
-
-
 </style>
