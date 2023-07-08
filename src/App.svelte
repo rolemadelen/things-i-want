@@ -227,16 +227,19 @@
 
   img.link-arrow {
     position: absolute;
-    top: 10px;
-    right: 10px;
+    margin: 0.5rem 0.5rem 0 0;
+    top: 3px;
+    right: 3px;
     width: 15px;
-    padding: 1rem;
+    padding: 0.1rem;
     transition: all 0.2s ease-in-out;
+    border-top: 2px solid black;
+    border-right: 2px solid black;
   }
 
   img.link-arrow:hover {
-    top: 3px;
-    right: 3px;
+    top: 0px;
+    right: 0px;
   }
   
   @media(min-width: 500px) {
@@ -245,6 +248,11 @@
     }
   }
   @media(min-width: 900px) {
+    img.link-arrow {
+      margin: 0;
+      padding: 1rem;
+      border: none;
+    }
     .grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
