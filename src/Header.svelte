@@ -3,14 +3,17 @@
 
 <header>
   <div class='header-title grid-item'>things i want</div>
-  <div class='hello grid-item'>Hello!</div>
+  <div class='hello grid-item'>
+    <a href="https://blog.jiieu.com" target="_blank" rel="noopener noreferrer">https://blog.jiieu.com</a>
+
+  </div>
   <div class='email grid-item'>
     <a href="mailto:hello@jiieu.com">hello@jiieu.com</a>
   </div>
   <div class='header-desc grid-item'>
     Welcome to my carefully curated list of things I want. 
     This collection represents a compilation of items that hold a special place in my heart, 
-    both as a developer and as a passionate taiko player. <br />
+    both as a developer and as a passionate taiko player.
     These coveted items embody the fusion of my professional 
     aspirations and personal passions, encapsulating both the products of my pure curiosity and the tools that can bring my dreams to life.
   </div>
@@ -33,14 +36,9 @@
     padding: 1rem;
   }
 
-  .hello,
-  .email {
-    color: white;
-  }
-
-  .hello:hover,
   .email:hover {
     background-color: #111;
+    color: #eee;
     transition: all 0.2s ease-in-out;
   }
 
@@ -52,6 +50,15 @@
     justify-content: center;
     align-items: center;
       flex-wrap: wrap;
+  }
+
+  .hello {
+    display: none;
+  }
+
+  .email {
+    color: #777;
+    padding: 1rem 0;
   }
 
   a {
@@ -70,12 +77,30 @@
     .header-desc {
       font-size: 1rem;
       grid-column: 1 / span 2;
+      line-height: 1.25;
+    }
+
+      .hello {
+        display: flex;
+      }
+    .hello,
+    .email {
+      color: white;
+    }
+
+    .hello:hover,
+    .email:hover {
+      background-color: #111;
+      transition: all 0.2s ease-in-out;
     }
   }
 
   @media(min-width: 900px) {
       .header-title {
         font-size: 3rem;
+      }
+      .header-desc {
+        padding: 1rem 5rem;
       }
     }
 
