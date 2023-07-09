@@ -27,6 +27,8 @@ featuring items that have captured my interest and resonate with my passions.
   - Svelte Transition
   - Grid system
     - grid-auto-flow
+  - Supabase
+    - getPublicUrl
 - **version 1** (branch [v1](https://github.com/rolemadelen/things-i-want/tree/v1))
   - Svelte (first time using it)
   - scroll transitions
