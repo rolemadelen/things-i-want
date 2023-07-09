@@ -15,7 +15,7 @@
 
   function handleClick(e) {
     category.update(text => text = e.currentTarget.innerText.split('\n')[1])
-    document.querySelector('nav .active').classList.remove('active')
+    document.querySelector('nav .active')?.classList.remove('active')
     e.currentTarget.classList.add('active')
   }
 </script>
