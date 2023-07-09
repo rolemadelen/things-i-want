@@ -33,25 +33,17 @@
     .then(data => {
       itemList = data
       fetchImages(data)
-      .then(url => {
-          publicURL = url;
-        })
     })
   })
 
-  async function fetchImages(items) {
-    let imageURL = new WeakMap();
-
-    await Promise.all(items.map(async function(item) {
-      const { data, error } = await supabase 
+  function fetchImages(items) {
+    items.map((item) => {
+      const { data } = supabase 
       .storage 
       .from('images')
-      .createSignedUrl(item.filename, 60)
-
-      imageURL[item.title] = data.signedUrl
-    }))
-
-    return imageURL;
+      .getPublicUrl(item.filename)
+      publicURL[item.title] = data.publicUrl
+    })
   }
 
   async function fetchItems() {
