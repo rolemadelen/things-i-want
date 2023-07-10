@@ -23,7 +23,7 @@
 <nav>
   {#each tags as tag, i}
     {#if i === 0}
-      <div class='nav-item active' on:click={handleClick}><span class='tag'>#</span>{tag}</div>
+      <div class='nav-item active' on:mouseover on:mouseleave on:click={handleClick}><span class='tag'>#</span>{tag}</div>
     {:else}
       <div class='nav-item' on:mouseover on:mouseleave on:click={handleClick}><span class='tag'>#</span>{tag}</div>
     {/if}
