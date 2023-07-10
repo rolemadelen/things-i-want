@@ -166,8 +166,8 @@
 
   .cursor {
     position: fixed;
-    top:0;
-    left:0;
+    top:-10rem;
+    left:-10rem;
     width: 18px;
     height: 18px;
     background-color: #000000ccc;
