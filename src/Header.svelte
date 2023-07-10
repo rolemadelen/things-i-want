@@ -3,7 +3,7 @@
 
 <header>
   <div class='header-title grid-item'>things i want</div>
-  <div class='hello grid-item'>
+  <div class='blog grid-item'>
     <a href="https://blog.jiieu.com" target="_blank" rel="noopener noreferrer">https://blog.jiieu.com</a>
 
   </div>
@@ -51,11 +51,11 @@
       flex-wrap: wrap;
   }
 
-  .hello {
+  .blog {
     display: none;
   }
 
-  .hello,
+  .blog,
   .email {
     color: #777;
     padding: 1rem 0;
@@ -81,16 +81,17 @@
       padding: 2rem;
     }
 
-      .hello {
-        display: flex;
-      }
-    .hello,
+    .blog {
+      display: flex;
+    }
+    .blog,
     .email {
-      color: white;
+      color: #777;
     }
 
-    .hello:hover,
+    .blog:hover,
     .email:hover {
+      color: #eee;
       background-color: #111;
       transition: all 0.2s ease-in-out;
     }
