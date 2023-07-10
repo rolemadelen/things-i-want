@@ -6,7 +6,9 @@
   import { category, hoverMode } from './store.js'
   import { onMount, onDestroy } from 'svelte'
   import { fly } from 'svelte/transition'
+  import { cubicOut } from 'svelte/easing'
   import { supabase } from './supabaseClient'
+  import { flip } from 'svelte/animate'
 
   let itemList = [];
   let hoverModeToggle = true;
@@ -87,8 +89,8 @@
     <Navigation items={itemList} />
   {/if}
   <div class='grid'>
-    {#each categoryItems as item}
-      <div transition:fly={{y: 200, duration: 250}} class='grid-item' class:hover-mode={hoverModeToggle}>
+    {#each categoryItems as item (item.title)}
+      <div animate:flip={{duration: 500, easing: cubicOut}} class='grid-item' class:hover-mode={hoverModeToggle}>
         {#if Object.keys(publicURL).length > 0}
           <Image src={publicURL[item.title]} alt={item.title} />
         {/if}
