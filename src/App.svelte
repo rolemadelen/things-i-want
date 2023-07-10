@@ -14,6 +14,7 @@
   let hoverModeToggle = true;
   let categoryItems = []
   let publicURL = new WeakMap();
+  let mouse = {x:0, y:0};
 
   $: categoryItems = itemList
   $: {
@@ -66,12 +67,7 @@
       categoryItems = itemList
     }
     else {
-      categoryItems = []
-      itemList.map(item => {
-        if(item.tags.includes(text)) {
-          categoryItems = [...categoryItems, item]
-        }
-      })
+      categoryItems = itemList.filter(item => item.tags.includes(text))
     }
   })
 
@@ -81,9 +77,17 @@
 
   onDestroy(unsubscribe)
   onDestroy(unsubscribe2)
+
+  const handleMouseMove = (e) => {
+    mouse.x = e.clientX;
+    mouse.y = e.clientY;
+    document.querySelector('.cursor').style.top = `${mouse.y-10}px`;
+    document.querySelector('.cursor').style.left = `${mouse.x-10}px`;
+  }
 </script>
 
-<main>
+<main on:mousemove={handleMouseMove}>
+  <div class='cursor'></div>
   <Header />
   {#if itemList.length > 0}
     <Navigation items={itemList} />
@@ -158,6 +162,20 @@
   .link-arrow:hover {
     top: 0px;
     right: 0px;
+  }
+
+  .cursor {
+    position: fixed;
+    top:0;
+    left:0;
+    width: 18px;
+    height: 18px;
+    background-color: #000000ccc;
+    border-radius: 9999px;
+    backdrop-filter: invert(1);
+    pointer-events: none;
+    z-index: 9999;
+    transition: top 0.2s linear, left 0.2s linear;
   }
 
   @media(min-width: 500px) {

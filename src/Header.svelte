@@ -61,6 +61,15 @@
     padding: 1rem 0;
   }
 
+    .blog a,
+    .email a {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
   a {
     color: inherit;
   }
@@ -103,6 +112,10 @@
       }
       .header-desc {
         padding: 2rem 5rem;
+      }
+
+      .blog, .email {
+        padding: none;
       }
     }
 
