@@ -96,6 +96,12 @@
     c.style.width = "18px";
     c.style.height = "18px";
   }
+
+  const formatCost = (cost) => {
+    cost = parseFloat(cost).toFixed(2);
+    cost = cost.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    return cost;
+  }
 </script>
 
 <main on:mousemove={handleMouseMove}>
@@ -112,7 +118,7 @@
         {/if}
         <div class="item-info">
           <div class='item-name'>{item.title}</div>
-          <div class='item-cost'>${item.cost}</div>
+          <div class='item-cost'><span class='dollar-sign'>$</span>{formatCost(item.cost)}</div>
         </div>
         <a on:mouseover={handleMouseOver} on:mouseleave={handleMouseLeave} href={item.link} target="_blank" rel="noopener noreferrer">
           <div class="link-arrow" />
@@ -126,6 +132,7 @@
 <style>
   main {
     width: fit-content;
+    font-family: 'Roboto';
   }
 
   .grid {
@@ -155,7 +162,14 @@
   }
 
   .item-cost {
-    font-weight: bold;
+    font-size: 22px;
+    font-weight: 500;
+  }
+
+  .dollar-sign {
+    font-size: 14px;
+    margin-right: 1px;
+    vertical-align: top;
   }
 
   .link-arrow {
