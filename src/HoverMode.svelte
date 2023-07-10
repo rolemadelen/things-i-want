@@ -10,7 +10,7 @@
 
 </script>
 
-<div class='hoverModeToggle' class:rectangle={isRectangle} on:click={handleClick}></div>
+<div class='hoverModeToggle' on:mouseover on:mouseleave class:rectangle={isRectangle} on:click={handleClick}></div>
 
 <style>
   @media (min-width: 900px) {
