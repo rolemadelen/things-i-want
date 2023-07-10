@@ -84,13 +84,25 @@
     document.querySelector('.cursor').style.top = `${mouse.y-10}px`;
     document.querySelector('.cursor').style.left = `${mouse.x-10}px`;
   }
+
+  const handleMouseOver = (e) => {
+    const c = document.querySelector('.cursor');
+    c.style.width = "36px";
+    c.style.height = "36px";
+  }
+
+  const handleMouseLeave = (e) => {
+    const c = document.querySelector('.cursor');
+    c.style.width = "18px";
+    c.style.height = "18px";
+  }
 </script>
 
 <main on:mousemove={handleMouseMove}>
   <div class='cursor'></div>
-  <Header />
+  <Header on:mouseover={handleMouseOver} on:mouseleave={handleMouseLeave} />
   {#if itemList.length > 0}
-    <Navigation items={itemList} />
+    <Navigation on:mouseover={handleMouseOver} on:mouseleave={handleMouseLeave} items={itemList} />
   {/if}
   <div class='grid'>
     {#each categoryItems as item (item.title)}
@@ -102,13 +114,13 @@
           <div class='item-name'>{item.title}</div>
           <div class='item-cost'>${item.cost}</div>
         </div>
-        <a href={item.link} target="_blank" rel="noopener noreferrer">
+        <a on:mouseover={handleMouseOver} on:mouseleave={handleMouseLeave} href={item.link} target="_blank" rel="noopener noreferrer">
           <div class="link-arrow" />
         </a>
       </div>
     {/each}
   </div>
-  <HoverMode />
+  <HoverMode on:mouseover={handleMouseOver} on:mouseleave={handleMouseLeave} />
 </main>
 
 <style>
@@ -170,12 +182,11 @@
     left:-10rem;
     width: 18px;
     height: 18px;
-    background-color: #000000ccc;
     border-radius: 9999px;
     backdrop-filter: invert(1);
     pointer-events: none;
     z-index: 9999;
-    transition: top 0.2s linear, left 0.2s linear;
+    transition: top 0.15s ease, left 0.15s ease, width 0.15s ease, height 0.15s ease;
   }
 
   @media(min-width: 500px) {

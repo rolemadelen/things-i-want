@@ -3,11 +3,11 @@
 
 <header>
   <div class='header-title grid-item'>things i want</div>
-  <div class='blog grid-item'>
+  <div on:mouseover on:mouseleave class='blog grid-item'>
     <a href="https://blog.jiieu.com" target="_blank" rel="noopener noreferrer">https://blog.jiieu.com</a>
 
   </div>
-  <div class='email grid-item'>
+  <div on:mouseover on:mouseleave class='email grid-item'>
     <a href="mailto:hello@jiieu.com">hello@jiieu.com</a>
   </div>
   <div class='header-desc grid-item'>
