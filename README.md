@@ -4,7 +4,7 @@ Welcome to the "Things I Want" page!
 This is a carefully curated list of items that I aspire to have in my life.
 From monitors and AR glasses to keyboards and authentic taiko drums, this collection encompasses a wide range of coveted objects.
 
-![sample](./public/sample.gif)
+![sample](./public/sample2.gif)
 
 ## Purpose
 
