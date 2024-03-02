@@ -4,7 +4,7 @@
 <header>
   <div class='header-title grid-item'>things i want</div>
   <div on:mouseover on:mouseleave class='blog grid-item'>
-    <a href="https://blog.jiiyoo.me" target="_blank" rel="noopener noreferrer">https://blog.jiiyoo.me</a>
+    <a href="https://blog.madelen.me" target="_blank" rel="noopener noreferrer">https://blog.madelen.me</a>
 
   </div>
   <div on:mouseover on:mouseleave class='email grid-item'>
