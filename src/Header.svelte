@@ -8,7 +8,7 @@
 
   </div>
   <div on:mouseover on:mouseleave class='email grid-item'>
-    <a href="mailto:rolemadelen@pm.me">rolemadelen@pm.me</a>
+    <a href="mailto:rolemadelen@tuta.io">rolemadelen@tuta.io</a>
   </div>
   <div class='header-desc grid-item'>
     Welcome to my carefully curated list of coveted items. 
