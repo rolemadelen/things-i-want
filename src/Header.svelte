@@ -4,11 +4,11 @@
 <header>
   <div class='header-title grid-item'>things i want</div>
   <div on:mouseover on:mouseleave class='blog grid-item'>
-    <a href="https://blog.madelen.me" target="_blank" rel="noopener noreferrer">https://blog.madelen.me</a>
+    <a href="https://blog.jiiyoo.me" target="_blank" rel="noopener noreferrer">https://blog.jiiyoo.me</a>
 
   </div>
   <div on:mouseover on:mouseleave class='email grid-item'>
-    <a href="mailto:rolemadelen@tuta.io">rolemadelen@tuta.io</a>
+    <a href="mailto:img9417@tuta.io">img9417@tuta.io</a>
   </div>
   <div class='header-desc grid-item'>
     Welcome to my carefully curated list of coveted items. 
