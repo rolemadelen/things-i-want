@@ -17,7 +17,7 @@ featuring items that have captured my interest and resonate with my passions.
 
 ## What I learned
 
-- **current** (branch [main](https://github.com/img9417/things-i-want/tree/main))
+- **current** (branch [main](https://github.com/rolemadelen/things-i-want/tree/main))
   - Svelte Stores
     - writable Stores
     - auto-subscrition
@@ -29,7 +29,7 @@ featuring items that have captured my interest and resonate with my passions.
     - grid-auto-flow
   - Supabase
     - getPublicUrl
-- **version 1** (branch [v1](https://github.com/img9417/things-i-want/tree/v1))
+- **version 1** (branch [v1](https://github.com/rolemadelen/things-i-want/tree/v1))
   - Svelte (first time using it)
   - scroll transitions
     - scroll-snap
